@@ -200,7 +200,13 @@ const Index = () => {
         {data.risk && (
           <Card className="sketchy-border grid grid-cols-1 gap-4 bg-card p-4 md:grid-cols-[1fr_auto] md:p-6">
             {/* Left — Score + Risk Summary */}
-            <div className="flex flex-col items-center gap-4 rounded-md border border-border bg-background/50 p-4">
+            <div
+              className="flex flex-col items-center gap-4 rounded-md border border-border bg-background/50 p-4"
+              style={{
+                transform: "translate(-2px, -2px)",
+                boxShadow: `4px 4px 0 0 ${riskStrokeMap[data.risk.level]}`,
+              }}
+            >
               <div className="flex-shrink-0">
                 <ScoreRadialChart score={data.risk.score ?? 0} color={riskStrokeMap[data.risk.level]} />
               </div>
