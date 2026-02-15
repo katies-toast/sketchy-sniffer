@@ -70,7 +70,7 @@ const Result = () => {
       <div className="min-h-screen bg-background paper-texture">
         <Navbar />
         <main className="container mx-auto flex max-w-2xl flex-col items-center gap-4 px-4 py-20 text-center">
-          <p className="font-heading text-4xl">😵</p>
+          <p className="font-heading text-4xl">(´•︵•`)</p>
           <p className="font-heading text-xl font-bold text-foreground">Something went wrong</p>
           <p className="font-body text-sm text-muted-foreground">{error || "No data returned."}</p>
           <Button onClick={() => navigate("/")} className="sketchy-border font-heading font-bold">
