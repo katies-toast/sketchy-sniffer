@@ -76,7 +76,7 @@ const Index = () => {
 
           <Button
             onClick={handleSniff}
-            className="sniff-pulse sketchy-border w-full py-6 font-heading text-lg font-bold"
+            className="tactile-btn w-full py-6 font-heading text-lg font-bold uppercase tracking-wide"
             size="lg"
           >
             👃 Sniff it

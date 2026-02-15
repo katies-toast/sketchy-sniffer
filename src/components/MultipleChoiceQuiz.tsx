@@ -43,7 +43,7 @@ const MultipleChoiceQuiz = ({ questions }: MultipleChoiceQuizProps) => {
                       variant={variant}
                       onClick={() => handleAnswer(q.id, opt.id)}
                       disabled={answered}
-                      className="justify-start text-left font-heading text-xs"
+                      className="tactile-btn justify-start text-left font-body text-sm font-medium text-foreground"
                     >
                       {opt.text}
                     </Button>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
 
@@ -28,13 +27,11 @@ const Navbar = () => {
             </a>
           </div>
 
-          <Button
-            className="sketchy-border font-heading font-bold"
-            size="sm"
-
+          <button
+            className="rounded-md border-[3px] border-foreground bg-[hsl(45,100%,65%)] px-4 py-1.5 font-heading text-xs font-bold uppercase tracking-wide text-foreground transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_rgba(31,31,31,1)] active:translate-x-0 active:translate-y-0 active:shadow-none"
           >
             Login
-          </Button>
+          </button>
         </div>
       </div>
     </nav>

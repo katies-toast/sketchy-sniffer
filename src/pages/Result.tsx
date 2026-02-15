@@ -76,7 +76,7 @@ const Result = () => {
           <p className="font-heading text-4xl">(´•︵•`)</p>
           <p className="font-heading text-xl font-bold text-foreground">Something went wrong</p>
           <p className="font-body text-sm text-muted-foreground">{error || "No data returned."}</p>
-          <Button onClick={() => navigate("/")} className="sketchy-border font-heading font-bold">
+          <Button onClick={() => navigate("/")} className="tactile-btn font-heading font-bold uppercase tracking-wide">
             👃 Try again
           </Button>
         </main>
@@ -121,27 +121,24 @@ const Result = () => {
             After review… what do you want to do?
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button
-              variant={decision === "proceed" ? "default" : "outline"}
-              className="sketchy-border-light flex-1 font-heading font-bold"
+            <button
+              className={`tactile-btn flex-1 rounded-md px-4 py-2.5 text-sm font-bold uppercase tracking-wide ${decision === "proceed" ? "bg-primary text-primary-foreground" : "bg-transparent text-primary"}`}
               onClick={() => setDecision("proceed")}
             >
               Proceed carefully
-            </Button>
-            <Button
-              variant={decision === "ask" ? "secondary" : "outline"}
-              className={`sketchy-border-light flex-1 font-heading font-bold ${decision !== "ask" ? "border-primary text-primary hover:bg-primary/10" : ""}`}
+            </button>
+            <button
+              className={`tactile-btn flex-1 rounded-md px-4 py-2.5 text-sm font-bold uppercase tracking-wide ${decision === "ask" ? "bg-[hsl(200,60%,45%)] text-white" : "bg-transparent text-[hsl(200,60%,45%)]"}`}
               onClick={() => setDecision("ask")}
             >
               Ask seller questions
-            </Button>
-            <Button
-              variant={decision === "avoid" ? "destructive" : "destructive"}
-              className={`sketchy-border-light flex-1 font-heading font-bold ${decision !== "avoid" ? "bg-transparent text-destructive hover:bg-destructive/10" : ""}`}
+            </button>
+            <button
+              className={`tactile-btn flex-1 rounded-md px-4 py-2.5 text-sm font-bold uppercase tracking-wide ${decision === "avoid" ? "bg-destructive text-destructive-foreground" : "bg-transparent text-destructive"}`}
               onClick={() => setDecision("avoid")}
             >
               Avoid this listing
-            </Button>
+            </button>
           </div>
           {decision && (
             <p className="text-center font-body text-sm text-muted-foreground">
@@ -153,7 +150,7 @@ const Result = () => {
         {/* Sniff Again */}
         <Button
           onClick={() => navigate("/")}
-          className="sniff-pulse sketchy-border w-full py-6 font-heading text-lg font-bold"
+          className="tactile-btn w-full py-6 font-heading text-lg font-bold uppercase tracking-wide"
           size="lg"
         >
           👃 Sniff another?
