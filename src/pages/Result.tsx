@@ -156,7 +156,7 @@ const Result = () => {
           className="sniff-pulse sketchy-border w-full py-6 font-heading text-lg font-bold"
           size="lg"
         >
-          👃 Sniff another
+          👃 Sniff another?
         </Button>
       </main>
     </div>
