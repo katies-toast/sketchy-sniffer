@@ -66,7 +66,7 @@ const Index = () => {
               onKeyDown={handleKeyDown}
               placeholder="Paste a Kijiji listing link here…"
               className="w-full resize-none bg-transparent px-5 py-4 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none md:text-lg"
-              rows={3}
+              rows={1}
             />
           </div>
 
