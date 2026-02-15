@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 hover-wiggle">
-          <span className="text-2xl" role="img" aria-label="nose">👃</span>
+          <img src="/snif.png" alt="SketchySniffer" className="h-14 w-15" />
           <span className="font-heading text-xl font-bold tracking-tight text-foreground md:text-2xl">
             SketchySniffer
           </span>
