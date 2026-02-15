@@ -19,7 +19,7 @@ const severityColor: Record<string, string> = {
 const RedFlagAccordion = ({ flags }: RedFlagAccordionProps) => {
   return (
     <div className="space-y-3">
-      <h2 className="font-heading text-2xl font-bold text-foreground">🚩 Why this score</h2>
+      <h2 className="font-heading text-2xl font-bold text-foreground">🚩 Why this score?</h2>
       <Accordion type="multiple" className="space-y-2">
         {flags.map((flag) => (
           <AccordionItem

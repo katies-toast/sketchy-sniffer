@@ -16,7 +16,7 @@ const MultipleChoiceQuiz = ({ questions }: MultipleChoiceQuizProps) => {
 
   return (
     <div className="space-y-3">
-      <h2 className="font-heading text-2xl font-bold text-foreground">Quick reality check</h2>
+      <h2 className="font-heading text-2xl font-bold text-foreground">Hold That Thought, It’s Sniff Test Time</h2>
       <Card className="sketchy-border space-y-4 bg-card p-5">
         {questions.map((q) => {
           const selectedId = answers[q.id];

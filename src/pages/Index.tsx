@@ -53,7 +53,7 @@ const Index = () => {
             <span className="text-primary">before you meet up.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md font-body text-base text-muted-foreground md:text-lg">
-            Paste a marketplace listing link and we'll sniff it for sketchiness.
+            Paste a Kijiji listing link and we'll sniff it for sketchiness.
           </p>
         </div>
 
