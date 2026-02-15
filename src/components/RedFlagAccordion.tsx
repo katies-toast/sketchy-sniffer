@@ -40,7 +40,7 @@ const RedFlagAccordion = ({ flags }: RedFlagAccordionProps) => {
             </AccordionTrigger>
             <AccordionContent className="space-y-2 font-body text-sm leading-relaxed text-foreground/80">
               <p>{flag.explanation}</p>
-              {flag.evidence.length > 0 && (
+              {flag.evidence?.length > 0 && (
                 <div className="space-y-1">
                   {flag.evidence.map((e, i) => (
                     <p key={i} className="text-xs italic text-muted-foreground">

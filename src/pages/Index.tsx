@@ -31,7 +31,7 @@ const Index = () => {
     }
 
     setError(null);
-    navigate("/result", { state: { url: trimmed } });
+    navigate(`/result?url=${encodeURIComponent(trimmed)}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

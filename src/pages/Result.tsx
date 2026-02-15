@@ -21,7 +21,7 @@ const riskLabelMap: Record<string, string> = {
 const Result = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const url = (location.state as { url?: string })?.url;
+  const url = new URLSearchParams(location.search).get("url");
 
   const [data, setData] = useState<AnalysisResponse | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,6 +41,7 @@ const Result = () => {
         setLoading(true);
         setError(null);
         const result = await analyzeUrl(url);
+        console.log("API response:", JSON.stringify(result, null, 2));
         if (!cancelled) setData(result);
       } catch (err) {
         if (!cancelled) setError(err instanceof Error ? err.message : "Something went wrong");
@@ -90,28 +91,29 @@ const Result = () => {
 
       <main className="container mx-auto max-w-2xl space-y-8 px-4 py-10 md:py-14">
         {/* Score Card */}
-        <Card className="sketchy-border flex flex-col items-center gap-6 bg-card p-6 md:flex-row md:items-start md:gap-8">
-          <div className="relative flex-shrink-0">
-            <ScoreRadialChart score={data.risk.score} />
-          </div>
-          <div className="flex-1 text-center md:text-left">
-            <h2 className="font-heading text-2xl font-bold text-secondary">
-              {riskLabelMap[data.risk.level] || data.risk.level}
-            </h2>
-            <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
-              {data.risk.summary}
-            </p>
-          </div>
-        </Card>
+        {data.risk && (
+          <Card className="sketchy-border flex flex-col items-center gap-6 bg-card p-6 md:flex-row md:items-start md:gap-8">
+            <div className="relative flex-shrink-0">
+              <ScoreRadialChart score={data.risk.score ?? 0} />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="font-heading text-2xl font-bold text-secondary">
+                {riskLabelMap[data.risk.level] || data.risk.level}
+              </h2>
+              <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
+                {data.risk.summary}
+              </p>
+            </div>
+          </Card>
+        )}
 
         {/* Findings */}
-        <RedFlagAccordion flags={data.findings} />
-
-        {/* Reflection Prompts */}
-        {/* <ReflectionPrompts prompts={data.reflection_prompts} /> */}
+        {data.findings?.length > 0 && (
+          <RedFlagAccordion flags={data.findings} />
+        )}
 
         {/* Quiz */}
-        {data.quiz.questions.length > 0 && (
+        {data.quiz?.questions?.length > 0 && (
           <MultipleChoiceQuiz questions={data.quiz.questions} />
         )}
 
