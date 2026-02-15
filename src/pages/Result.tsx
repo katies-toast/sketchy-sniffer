@@ -1,74 +1,85 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import ScoreRadialChart from "@/components/ScoreRadialChart";
 import RedFlagAccordion from "@/components/RedFlagAccordion";
-import TrueFalseQuiz from "@/components/TrueFalseQuiz";
+import ReflectionPrompts from "@/components/ReflectionPrompts";
+import MultipleChoiceQuiz from "@/components/MultipleChoiceQuiz";
+import { analyzeUrl } from "@/lib/api";
+import type { AnalysisResponse } from "@/types/analysis";
 
-const mockData = {
-  score: 72,
-  riskLabel: "Moderate risk",
-  summary:
-    "This listing has several characteristics commonly associated with scam posts. The price is suspiciously low for the item described, and the seller's account shows signs of being recently created with no prior activity.",
-  redFlags: [
-    {
-      title: "Too-good-to-be-true price",
-      summary: "The listed price is 60% below market average.",
-      explanation:
-        "When a price is dramatically below what similar items sell for, it's often a tactic to lure buyers quickly. Legitimate sellers typically price within a reasonable range of market value. Always compare with other listings before committing.",
-    },
-    {
-      title: "New seller account",
-      summary: "The account was created less than a week ago.",
-      explanation:
-        "Scammers frequently create new accounts to avoid being tracked. While new accounts aren't always suspicious, combined with other red flags it raises concern. Check if the seller has any reviews or history.",
-    },
-    {
-      title: "Vague item description",
-      summary: "The listing lacks specific details about the item.",
-      explanation:
-        "Legitimate sellers usually provide detailed descriptions including brand, model, condition, and reason for selling. Vague listings can hide defects or indicate the seller doesn't actually possess the item.",
-    },
-    {
-      title: "Stock photos used",
-      summary: "Images appear to be taken from the internet.",
-      explanation:
-        "If the photos look too professional or appear on other websites, the seller may not actually have the item. Ask for photos with a specific detail (like a note with today's date) to verify authenticity.",
-    },
-    {
-      title: "Pressure to act fast",
-      summary: 'Listing uses urgency language like "must go today."',
-      explanation:
-        "Creating artificial urgency is a classic pressure tactic. Real sellers are usually flexible on timing. If someone insists you must decide immediately, it's often to prevent you from doing your due diligence.",
-    },
-  ],
-  quizQuestions: [
-    {
-      question: "A listing price 60% below market value is always a great deal.",
-      correctAnswer: false,
-      explanation: "Prices far below market value are a common scam tactic to attract victims quickly.",
-    },
-    {
-      question: "You should ask to meet in a public place for any marketplace transaction.",
-      correctAnswer: true,
-      explanation: "Public places with cameras (like police station parking lots) are the safest choice.",
-    },
-    {
-      question: "If a seller only accepts e-transfer, that's a red flag.",
-      correctAnswer: true,
-      explanation: "E-transfers are hard to reverse. Scammers prefer irreversible payment methods.",
-    },
-    {
-      question: "A seller with no reviews is definitely a scammer.",
-      correctAnswer: false,
-      explanation: "Everyone starts with zero reviews — but combined with other red flags, be cautious.",
-    },
-  ],
+const riskLabelMap: Record<string, string> = {
+  low: "Low risk",
+  medium: "Moderate risk",
+  high: "High risk",
 };
 
 const Result = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const url = (location.state as { url?: string })?.url;
+
+  const [data, setData] = useState<AnalysisResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!url) {
+      navigate("/");
+      return;
+    }
+
+    let cancelled = false;
+
+    const fetchAnalysis = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const result = await analyzeUrl(url);
+        if (!cancelled) setData(result);
+      } catch (err) {
+        if (!cancelled) setError(err instanceof Error ? err.message : "Something went wrong");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchAnalysis();
+    return () => { cancelled = true; };
+  }, [url, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background paper-texture">
+        <Navbar />
+        <main className="container mx-auto flex max-w-2xl flex-col items-center px-4 py-20">
+          <div className="animate-pulse space-y-4 text-center">
+            <p className="font-heading text-4xl">👃</p>
+            <p className="font-heading text-xl font-bold text-foreground">Sniffing…</p>
+            <p className="font-body text-sm text-muted-foreground">Analyzing the listing for red flags and sketchy patterns.</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="min-h-screen bg-background paper-texture">
+        <Navbar />
+        <main className="container mx-auto flex max-w-2xl flex-col items-center gap-4 px-4 py-20 text-center">
+          <p className="font-heading text-4xl">😵</p>
+          <p className="font-heading text-xl font-bold text-foreground">Something went wrong</p>
+          <p className="font-body text-sm text-muted-foreground">{error || "No data returned."}</p>
+          <Button onClick={() => navigate("/")} className="sketchy-border font-heading font-bold">
+            👃 Try again
+          </Button>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background paper-texture">
@@ -78,23 +89,28 @@ const Result = () => {
         {/* Score Card */}
         <Card className="sketchy-border flex flex-col items-center gap-6 bg-card p-6 md:flex-row md:items-start md:gap-8">
           <div className="relative flex-shrink-0">
-            <ScoreRadialChart score={mockData.score} />
+            <ScoreRadialChart score={data.risk.score} />
           </div>
           <div className="flex-1 text-center md:text-left">
             <h2 className="font-heading text-2xl font-bold text-secondary">
-              {mockData.riskLabel}
+              {riskLabelMap[data.risk.level] || data.risk.level}
             </h2>
             <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
-              {mockData.summary}
+              {data.risk.summary}
             </p>
           </div>
         </Card>
 
-        {/* Red Flags */}
-        <RedFlagAccordion flags={mockData.redFlags} />
+        {/* Findings */}
+        <RedFlagAccordion flags={data.findings} />
+
+        {/* Reflection Prompts */}
+        <ReflectionPrompts prompts={data.reflection_prompts} />
 
         {/* Quiz */}
-        <TrueFalseQuiz questions={mockData.quizQuestions} />
+        {data.quiz.questions.length > 0 && (
+          <MultipleChoiceQuiz questions={data.quiz.questions} />
+        )}
 
         {/* Decision Card */}
         <Card className="sketchy-border space-y-4 bg-card p-6">

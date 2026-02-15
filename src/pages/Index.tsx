@@ -8,7 +8,8 @@ const Index = () => {
   const navigate = useNavigate();
 
   const handleSniff = () => {
-    navigate("/result");
+    if (!link.trim()) return;
+    navigate("/result", { state: { url: link.trim() } });
   };
 
   return (
