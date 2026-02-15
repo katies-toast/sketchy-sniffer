@@ -21,7 +21,7 @@ const TrueFalseQuiz = ({ questions }: TrueFalseQuizProps) => {
 
   return (
     <div className="space-y-3">
-      <h2 className="font-heading text-2xl font-bold text-foreground">🧠 Quick reality check</h2>
+      <h2 className="font-heading text-2xl font-bold text-foreground">Quick reality check</h2>
       <Card className="sketchy-border space-y-4 bg-card p-5">
         {questions.map((q, i) => {
           const answered = answers[i] !== undefined && answers[i] !== null;
@@ -52,7 +52,7 @@ const TrueFalseQuiz = ({ questions }: TrueFalseQuizProps) => {
               </div>
               {answered && (
                 <p className={`font-body text-xs ${correct ? "text-primary" : "text-secondary"}`}>
-                  {correct ? "✅ Correct!" : "❌ Not quite."} {q.explanation}
+                  {correct ? "Correct!" : "Not quite."} {q.explanation}
                 </p>
               )}
             </div>

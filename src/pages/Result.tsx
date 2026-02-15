@@ -119,13 +119,13 @@ const Result = () => {
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button variant="outline" className="sketchy-border-light flex-1 font-heading font-bold">
-              ✅ Proceed carefully
+              Proceed carefully
             </Button>
             <Button variant="outline" className="sketchy-border-light flex-1 font-heading font-bold">
-              💬 Ask seller questions
+              Ask seller questions
             </Button>
             <Button variant="destructive" className="sketchy-border-light flex-1 font-heading font-bold">
-              🚫 Avoid this listing
+              Avoid this listing
             </Button>
           </div>
         </Card>
