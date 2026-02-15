@@ -3,13 +3,42 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 
+function isValidUrl(text: string): boolean {
+  try {
+    const url = new URL(text);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 const Index = () => {
   const [link, setLink] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSniff = () => {
-    if (!link.trim()) return;
-    navigate("/result", { state: { url: link.trim() } });
+    const trimmed = link.trim();
+
+    if (!trimmed) {
+      setError("Please enter a listing link to sniff.");
+      return;
+    }
+
+    if (!isValidUrl(trimmed)) {
+      setError("That doesn't look like a valid link. Please enter a full URL.");
+      return;
+    }
+
+    setError(null);
+    navigate("/result", { state: { url: trimmed } });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSniff();
+    }
   };
 
   return (
@@ -33,12 +62,17 @@ const Index = () => {
           <div className="sketchy-border overflow-hidden bg-card">
             <textarea
               value={link}
-              onChange={(e) => setLink(e.target.value)}
+              onChange={(e) => { setLink(e.target.value); setError(null); }}
+              onKeyDown={handleKeyDown}
               placeholder="Paste a Kijiji listing link here…"
               className="w-full resize-none bg-transparent px-5 py-4 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none md:text-lg"
               rows={3}
             />
           </div>
+
+          {error && (
+            <p className="text-center font-body text-sm text-secondary">{error}</p>
+          )}
 
           <Button
             onClick={handleSniff}
@@ -49,7 +83,7 @@ const Index = () => {
           </Button>
 
           <p className="text-center font-body text-xs text-muted-foreground">
-            We don’t make decisions for you. We help you think through them.
+            We don't make decisions for you. We help you think through them.
           </p>
         </div>
       </main>
