@@ -1,19 +1,21 @@
 interface ScoreRadialChartProps {
   score: number;
   size?: number;
+  color?: string;
 }
 
-const ScoreRadialChart = ({ score, size = 160 }: ScoreRadialChartProps) => {
+const ScoreRadialChart = ({ score, size = 160, color }: ScoreRadialChartProps) => {
   const strokeWidth = 12;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
 
-  // Color based on score
+  // Color based on score (fallback if no color prop)
   const getColor = () => {
-    if (score >= 70) return "hsl(var(--secondary))"; // red/warning
-    if (score >= 40) return "hsl(var(--primary))"; // moderate
-    return "hsl(166 30% 55%)"; // safe green-ish
+    if (color) return color;
+    if (score >= 70) return "hsl(var(--secondary))";
+    if (score >= 40) return "hsl(var(--primary))";
+    return "hsl(166 30% 55%)";
   };
 
   return (

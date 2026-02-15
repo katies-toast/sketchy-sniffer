@@ -26,6 +26,18 @@ const riskLabelMap: Record<string, string> = {
   high: "High risk",
 };
 
+const riskColorMap: Record<string, string> = {
+  low: "text-primary",
+  medium: "text-[hsl(45,100%,40%)]",
+  high: "text-destructive",
+};
+
+const riskStrokeMap: Record<string, string> = {
+  low: "hsl(var(--primary))",
+  medium: "hsl(45,100%,40%)",
+  high: "hsl(var(--destructive))",
+};
+
 const Index = () => {
   const [link, setLink] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -190,10 +202,10 @@ const Index = () => {
             {/* Left — Score + Risk Summary */}
             <div className="flex flex-col items-center gap-4 rounded-md border border-border bg-background/50 p-4">
               <div className="flex-shrink-0">
-                <ScoreRadialChart score={data.risk.score ?? 0} />
+                <ScoreRadialChart score={data.risk.score ?? 0} color={riskStrokeMap[data.risk.level]} />
               </div>
               <div className="text-center">
-                <h2 className="font-heading text-2xl font-bold text-secondary">
+                <h2 className={`font-heading text-2xl font-bold ${riskColorMap[data.risk.level] || "text-secondary"}`}>
                   {riskLabelMap[data.risk.level] || data.risk.level}
                 </h2>
                 <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
