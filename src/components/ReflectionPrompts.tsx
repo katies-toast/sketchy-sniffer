@@ -14,7 +14,7 @@ const ReflectionPrompts = ({ prompts }: ReflectionPromptsProps) => {
       <Card className="sketchy-border space-y-3 bg-card p-5">
         {prompts.map((p) => (
           <p key={p.id} className="font-body text-sm leading-relaxed text-foreground/80">
-            💭 {p.prompt}
+            {p.prompt}
           </p>
         ))}
       </Card>
