@@ -31,7 +31,7 @@ const Navbar = () => {
           <Button
             className="sketchy-border font-heading font-bold"
             size="sm"
-            variant="outline"
+
           >
             Login
           </Button>
