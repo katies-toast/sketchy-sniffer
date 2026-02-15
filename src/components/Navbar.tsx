@@ -16,22 +16,20 @@ const Navbar = () => {
         {/* Nav Links + Login */}
         <div className="flex items-center gap-6">
           <div className="hidden items-center gap-6 md:flex">
-            <Link to="/" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
-              Home
-            </Link>
-            <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+            <Link to="/how-it-works" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
               How it Works
-            </a>
-            <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+            </Link>
+            <Link to="/about" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
               About
-            </a>
+            </Link>
           </div>
 
-          <button
+          <Link
+            to="/login"
             className="rounded-md border-[3px] border-foreground bg-[hsl(45,100%,65%)] px-4 py-1.5 font-heading text-xs font-bold uppercase tracking-wide text-foreground transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_rgba(31,31,31,1)] active:translate-x-0 active:translate-y-0 active:shadow-none"
           >
             Login
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
