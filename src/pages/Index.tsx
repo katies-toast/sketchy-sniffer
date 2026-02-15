@@ -24,7 +24,7 @@ const Index = () => {
             <span className="text-primary">before you meet up.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md font-body text-base text-muted-foreground md:text-lg">
-            Paste a marketplace listing link and we'll score it for sketchiness — plus explain the red flags.
+            Paste a marketplace listing link and we'll sniff it for sketchiness.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ const Index = () => {
           </Button>
 
           <p className="text-center font-body text-xs text-muted-foreground">
-            We don't store your link. This is just a quick safety check.
+            We don’t make decisions for you. We help you think through them.
           </p>
         </div>
       </main>
