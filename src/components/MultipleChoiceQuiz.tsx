@@ -52,7 +52,7 @@ const MultipleChoiceQuiz = ({ questions }: MultipleChoiceQuizProps) => {
               </div>
               {answered && (
                 <p className={`font-body text-xs ${correct ? "text-primary" : "text-secondary"}`}>
-                  {correct ? `${q.feedback.correct_title}` : `${q.feedback.incorrect_title}`}{" "}
+                  {correct ? `${q.feedback.correct_title}` : `${q.feedback.incorrect_title}`}{"! "}
                   {correct ? q.feedback.correct_body : q.feedback.incorrect_body}
                 </p>
               )}
