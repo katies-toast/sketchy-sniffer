@@ -9,6 +9,8 @@ import ReflectionPrompts from "@/components/ReflectionPrompts";
 import MultipleChoiceQuiz from "@/components/MultipleChoiceQuiz";
 import { analyzeUrl } from "@/lib/api";
 import type { AnalysisResponse } from "@/types/analysis";
+import { Mirage } from "ldrs/react";
+import "ldrs/react/Mirage.css";
 
 const riskLabelMap: Record<string, string> = {
   low: "Low risk",
@@ -55,8 +57,8 @@ const Result = () => {
       <div className="min-h-screen bg-background paper-texture">
         <Navbar />
         <main className="container mx-auto flex max-w-2xl flex-col items-center px-4 py-20">
-          <div className="animate-pulse space-y-4 text-center">
-            <p className="font-heading text-4xl">👃</p>
+          <div className="space-y-4 text-center">
+            <Mirage size="60" speed="2.5" color="black" />
             <p className="font-heading text-xl font-bold text-foreground">Sniffing…</p>
             <p className="font-body text-sm text-muted-foreground">Analyzing the listing for red flags and sketchy patterns.</p>
           </div>
