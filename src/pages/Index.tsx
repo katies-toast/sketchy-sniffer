@@ -186,17 +186,43 @@ const Index = () => {
       <main className="container mx-auto max-w-2xl space-y-8 px-4 py-10 md:py-14">
         {/* Score Card */}
         {data.risk && (
-          <Card className="sketchy-border flex flex-col items-center gap-6 bg-card p-6 md:flex-row md:items-start md:gap-8">
-            <div className="relative flex-shrink-0">
-              <ScoreRadialChart score={data.risk.score ?? 0} />
+          <Card className="sketchy-border grid grid-cols-1 gap-4 bg-card p-4 md:grid-cols-[1fr_auto] md:p-6">
+            {/* Left — Score + Risk Summary */}
+            <div className="flex flex-col items-center gap-4 rounded-md border border-border bg-background/50 p-4">
+              <div className="flex-shrink-0">
+                <ScoreRadialChart score={data.risk.score ?? 0} />
+              </div>
+              <div className="text-center">
+                <h2 className="font-heading text-2xl font-bold text-secondary">
+                  {riskLabelMap[data.risk.level] || data.risk.level}
+                </h2>
+                <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
+                  {data.risk.summary}
+                </p>
+              </div>
             </div>
-            <div className="flex-1 text-center md:text-left">
-              <h2 className="font-heading text-2xl font-bold text-secondary">
-                {riskLabelMap[data.risk.level] || data.risk.level}
-              </h2>
-              <p className="mt-2 font-body text-sm leading-relaxed text-foreground/80">
-                {data.risk.summary}
-              </p>
+
+            {/* Right — Listing Info */}
+            <div className="flex flex-col gap-4 md:w-64">
+              {/* Title + Price */}
+              <div className="rounded-md border border-border bg-background/50 p-4">
+                <h3 className="font-heading text-lg font-bold text-foreground">
+                  {data.listing?.title}
+                </h3>
+                {data.listing?.price && (
+                  <p className="mt-1 font-heading text-xl font-bold text-primary">
+                    ${data.listing.price.amount.toLocaleString()} {data.listing.price.currency}
+                  </p>
+                )}
+              </div>
+
+              {/* Description (scrollable, fixed height) */}
+              <div className="max-h-48 overflow-y-auto rounded-md border border-border bg-background/50 p-4">
+                <h4 className="font-heading text-lg font-bold text-foreground pb-1">Description</h4>
+                <p className="font-body text-sm leading-relaxed text-foreground/80">
+                  {data.listing?.description}
+                </p>
+              </div>
             </div>
           </Card>
         )}

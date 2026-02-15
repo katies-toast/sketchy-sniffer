@@ -10,6 +10,49 @@ export interface AnalysisResponse {
     platform: "kijiji" | "facebook_marketplace" | "unknown";
     url: string;
   };
+  listing: {
+    title: string;
+    description: string;
+    price: {
+      amount: number;
+      currency: string;
+      priceDrop: boolean;
+    };
+    location: {
+      name: string;
+      address: string;
+      coordinates: {
+        latitude: number;
+        longitude: number;
+      };
+    };
+    category: string[];
+    images: {
+      urls: string[];
+      count: number;
+    };
+    seller: {
+      id: string;
+      verified: boolean;
+      type: string;
+      name: string;
+      numberOfListings: number;
+      hasProfilePhoto: boolean;
+    };
+    listing: {
+      id: string;
+      activationDate: string;
+      endDate: string;
+      views: number;
+      topAd: boolean;
+      adSource: string;
+    };
+    payment: {
+      cashAccepted: boolean;
+      cashless: boolean;
+      shipping: boolean;
+    };
+  };
   risk: {
     score: number;
     level: "low" | "medium" | "high";
