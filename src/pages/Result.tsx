@@ -59,7 +59,7 @@ const Result = () => {
         <Navbar />
         <main className="container mx-auto flex max-w-2xl flex-col items-center px-4 py-20">
           <div className="space-y-4 text-center">
-            <Mirage size="60" speed="2.5" color="black" />
+            <Mirage size="300" speed="2.5" color="black" />
             <p className="font-heading text-xl font-bold text-foreground">Sniffing…</p>
             <p className="font-body text-sm text-muted-foreground">Analyzing the listing for red flags and sketchy patterns.</p>
           </div>
