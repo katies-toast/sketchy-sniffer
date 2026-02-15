@@ -26,6 +26,7 @@ const Result = () => {
   const [data, setData] = useState<AnalysisResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [decision, setDecision] = useState<string | null>(null);
 
   useEffect(() => {
     if (!url) {
@@ -120,16 +121,33 @@ const Result = () => {
             After review… what do you want to do?
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button variant="outline" className="sketchy-border-light flex-1 font-heading font-bold">
+            <Button
+              variant={decision === "proceed" ? "default" : "outline"}
+              className="sketchy-border-light flex-1 font-heading font-bold"
+              onClick={() => setDecision("proceed")}
+            >
               Proceed carefully
             </Button>
-            <Button variant="outline" className="sketchy-border-light flex-1 font-heading font-bold">
+            <Button
+              variant={decision === "ask" ? "secondary" : "outline"}
+              className={`sketchy-border-light flex-1 font-heading font-bold ${decision !== "ask" ? "border-primary text-primary hover:bg-primary/10" : ""}`}
+              onClick={() => setDecision("ask")}
+            >
               Ask seller questions
             </Button>
-            <Button variant="destructive" className="sketchy-border-light flex-1 font-heading font-bold">
+            <Button
+              variant={decision === "avoid" ? "destructive" : "destructive"}
+              className={`sketchy-border-light flex-1 font-heading font-bold ${decision !== "avoid" ? "bg-transparent text-destructive hover:bg-destructive/10" : ""}`}
+              onClick={() => setDecision("avoid")}
+            >
               Avoid this listing
             </Button>
           </div>
+          {decision && (
+            <p className="text-center font-body text-sm text-muted-foreground">
+              Trust your judgement. You've done your research.
+            </p>
+          )}
         </Card>
 
         {/* Sniff Again */}
