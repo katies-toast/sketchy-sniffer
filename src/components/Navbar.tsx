@@ -1,8 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
-  const navigate = useNavigate();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b-2 border-border bg-background/95 backdrop-blur">
@@ -15,27 +14,28 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Nav Links */}
-        <div className="hidden items-center gap-6 md:flex">
-          <Link to="/" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
-            Home
-          </Link>
-          <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
-            How it Works
-          </a>
-          <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
-            About
-          </a>
-        </div>
+        {/* Nav Links + Login */}
+        <div className="flex items-center gap-6">
+          <div className="hidden items-center gap-6 md:flex">
+            <Link to="/" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+              Home
+            </Link>
+            <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+              How it Works
+            </a>
+            <a href="#" className="font-body text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+              About
+            </a>
+          </div>
 
-        {/* CTA */}
-        <Button
-          onClick={() => navigate("/")}
-          className="sniff-pulse sketchy-border font-heading font-bold"
-          size="sm"
-        >
-          Sniff a link
-        </Button>
+          <Button
+            className="sketchy-border font-heading font-bold"
+            size="sm"
+            variant="outline"
+          >
+            Login
+          </Button>
+        </div>
       </div>
     </nav>
   );
