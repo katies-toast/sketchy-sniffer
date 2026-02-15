@@ -1,6 +1,6 @@
 import { AnalysisResponse } from "@/types/analysis";
 
-const BASE_URL = "https://sketchysnifferapi-production.up.railway.app/api/";
+const BASE_URL = "https://sketchysnifferapi-production.up.railway.app/api";
 
 export async function analyzeUrl(url: string): Promise<AnalysisResponse> {
   const response = await fetch(`${BASE_URL}/analyses`, {
