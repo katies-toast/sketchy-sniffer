@@ -114,13 +114,13 @@ const Index = () => {
           {/* Input area */}
           <div className="w-full max-w-xl space-y-4">
             <div className="sketchy-border overflow-hidden bg-card">
-              <textarea
+              <input
+                type="text"
                 value={link}
                 onChange={(e) => { setLink(e.target.value); setError(null); }}
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleSniff(); } }}
                 placeholder="Paste a Kijiji listing link here…"
-                className="w-full resize-none bg-transparent px-5 py-4 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none md:text-lg"
-                rows={1}
+                className="w-full bg-transparent px-5 py-4 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none md:text-lg"
               />
             </div>
 
