@@ -105,7 +105,7 @@ const Result = () => {
         <RedFlagAccordion flags={data.findings} />
 
         {/* Reflection Prompts */}
-        <ReflectionPrompts prompts={data.reflection_prompts} />
+        {/* <ReflectionPrompts prompts={data.reflection_prompts} /> */}
 
         {/* Quiz */}
         {data.quiz.questions.length > 0 && (
