@@ -222,19 +222,19 @@ const HowItWorks = () => {
           </p>
           <div className="space-y-2">
             <div className="flex items-center gap-3">
-              <span className="inline-block h-3 w-3 rounded-full bg-green-500" />
+              <span className="inline-block h-3 w-3 rounded-full bg-primary" />
               <span className="font-body text-sm text-foreground/80">
                 <span className="font-bold">0 to 33, Low risk.</span> No major red flags. Proceed with normal caution.
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="inline-block h-3 w-3 rounded-full bg-yellow-500" />
+              <span className="inline-block h-3 w-3 rounded-full bg-[hsl(45,100%,65%)]" />
               <span className="font-body text-sm text-foreground/80">
                 <span className="font-bold">34 to 66, Moderate risk.</span> Some concerning signals. Verify before committing.
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="inline-block h-3 w-3 rounded-full bg-red-500" />
+              <span className="inline-block h-3 w-3 rounded-full bg-destructive" />
               <span className="font-body text-sm text-foreground/80">
                 <span className="font-bold">67 to 100, High risk.</span> Multiple red flags. We'd recommend walking away.
               </span>
